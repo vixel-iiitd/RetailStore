@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block title %}Add Product{% endblock %} 
+
+{% block content%}
+<body>
+{% csrf_token %}
+    <h5 my = 5 align = "center" class="display-4 fw-normal">Delivery Product</h5>
+      <table class="table table-hover table-bordered text-center" style="background-color: #96D4D4;">
+        <tr>
+          <th>OrderID</th>
+          <th>CustomerID</th>
+          <th>Price</th>
+          <th>Address</th>
+          <th>Zip</th>
+        </tr> 
+        
+        {% for row in table1 %}
+        <tr>
+          {% for col in row %}
+          <td>{{col}}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </table>
+    {%endblock%}

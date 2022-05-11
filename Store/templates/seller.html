@@ -1,0 +1,95 @@
+{% extends "base.html" %} {% block title %}Seller{% endblock %} 
+
+{% block content%}
+<body>
+{% csrf_token %}
+<style>
+  h2{
+    margin: auto;
+    width: 200px;
+  }
+</style>
+<h2 class="display-4 fw-normal">Seller</h2>
+<h5 class="display-4 fw-normal">Your List</h5>
+  <table class="table table-hover table-bordered text-center" style="background-color: #96D4D4;">
+    <tr>
+      <th>ProductID</th>
+      <th>ProductName</th>
+      <th>Price</th>
+      <th>Brand</th>
+      <th>CategoryID</th>
+    </tr> 
+    
+    {% for row in table %}
+    <tr>
+      {% for col in row %}
+      <td>{{col}}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+  
+  <h5 class="display-4 fw-normal">Orders</h5>
+  <table class="table table-hover table-bordered text-center" style="background-color: #96D4D4;">
+    <tr>
+      <th>ProductID</th>
+      <th>OrderID</th>
+      <th>Quantity</th>
+      </tr> 
+    
+    {% for row in table1 %}
+    <tr>
+      {% for col in row %}
+      <td>{{col}}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+  <form method='POST'>
+    {% csrf_token %}  
+    <h5 class="display-4 fw-normal">Update Price</h5>
+      <p align="center">
+        <div class="form-group">
+          <label for="productID">Product ID</label>
+          <input
+            type="productID"
+            class="form-control"
+            id="productID"
+            name="productID"
+            placeholder="Product ID"
+          />
+        </div>
+        <div class="form-group">
+          <label for="Update Price">Updated Price</label>
+          <input
+            type="Update Price"
+            class="form-control"
+            id="Update Price"
+            name="Update Price"
+            placeholder="Update Price"
+          />
+        </div>
+        
+        <button type="submit" name="update_price" formmethod="post" class="btn btn-primary">Update Price</button>
+        </p>
+        <h5 class="display-4 fw-normal">Drop Product</h5>
+      <p align="center">
+        <div class="form-group">
+          <label for="productID1">Product ID</label>
+          <input
+            type="productID1"
+            class="form-control"
+            id="productID1"
+            name="productID1"
+            placeholder="Product ID"
+          />
+        </div>
+        <button type="submit" name="drop_product" formmethod="post" class="btn btn-primary">Drop Product</button>
+        </p>
+        <p align="center">
+        <button type="submit" name="add_product" formmethod="post" class="btn btn-primary">Add Product</button>
+        </p>   
+      </form>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base.html" %} {% block title %}Add Product{% endblock %} 
+
+{% block content%}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h3 class="display-4 fw-normal text-center">Add Product</h3>
+  <div class="form-group">
+    <label for="email">Product ID</label>
+    <input
+      type="productID"
+      class="form-control"
+      id="productID"
+      name="productID"
+      placeholder="Product ID"
+    />
+  </div>
+  <div class="form-group">
+    <label for="ProductName">Product Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="ProductName"
+      name="ProductName"
+      placeholder="Enter Product name"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="category">Category</label>
+    <input
+      type="category"
+      class="form-control"
+      id="category"
+      name="category"
+      placeholder="category"
+    />
+  </div>
+  <div class="form-group">
+    <label for="Price">Price</label>
+    <input
+      type="Price"
+      class="form-control"
+      id="Price"
+      name="Price"
+      placeholder="Enter Price"
+    />
+  </div>
+  <div class="form-group">
+    <label for="Brand">Brand</label>
+    <input
+      type="Brand"
+      class="form-control"
+      id="Brand"
+      name="Brand"
+      placeholder="Enter Brand"
+    />
+  </div>
+  <div class = "form-group">
+    <label for ="Image">Image Upload</label>
+    <input type="file" class = "form-control" id="myFile" name="filename">
+  </div>
+  <br />
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{% endblock %}

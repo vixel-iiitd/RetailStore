@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block title %} Groceries {% endblock title %}
+{% block body %}
+
+<div class="container">
+    <h1 class="my-4 text-center">Groceries</h1>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        
+        {% for product in products %}
+            <div class="col">
+                <div class="card shadow-sm">
+
+                    {% comment %} <img src={{product.img}} alt=""> {% endcomment %}
+                    <div class="card-body">
+                        <p class="card-text">{{product.1}}</p>
+                        <img src = {{product.7}} width="200" height="250" align="center" >
+                        <div class="text-center">
+                            <h5>Price ₹{{product.2}}</h5>
+                            <div class="btn-group">
+                                <button data-pid="{{product.0}}" data-sid="{{product.5}}" data-action="add" type="button" class="btn btn-primary update-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    {% comment %} get_product = (Pid, Sid) => {
+        console.log("Pid, Sid")
+    } {% endcomment %}
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+
+    var updateBtns = document.getElementsByClassName('update-cart')
+
+    console.log(updateBtns[0].dataset)
+    for(var i = 0; i < updateBtns.length; i++) {
+        updateBtns[i].addEventListener('click', function() {
+            const Pid = this.dataset.pid
+            const Sid = this.dataset.sid
+            const action = this.dataset.action
+            console.log(Pid, Sid, action)
+
+            update_order(Pid, Sid, action)
+        })
+    }
+
+    function update_order(Pid, Sid, action) {
+        const url = '/update_item'
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken
+            },
+            body: JSON.stringify({
+                'Pid': Pid,
+                'Sid': Sid,
+                'action': action 
+            })
+        }).then((response) => {
+            return response.json()
+        }).then((data) => {
+            console.log(data)
+            window.location.reload()
+        })
+    }
+</script>
+{% endblock body %}

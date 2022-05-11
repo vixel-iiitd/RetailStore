@@ -1,0 +1,34 @@
+{% extends "base.html" %} {% block title %}Add Product{% endblock %} 
+
+{% block content%}
+<body>
+{% csrf_token %}
+<style>
+  h2{
+    margin: auto;
+    width: 200px;
+  }
+</style>
+<h2 class="display-4 fw-normal">Customer</h2>
+<h5 class="display-4 fw-normal">Your Orders</h5>
+  <table class="table table-hover table-bordered text-center" style="background-color: #96D4D4;">
+    <tr>
+      <th>OrderID</th>
+      <th>Price</th>
+      <th>Address</th>
+      <th>DeliveryPerson</th>
+      <th>ZIP</th>
+    </tr> 
+    
+    {% for row in table %}
+    <tr>
+      {% for col in row %}
+      <td>{% if forloop.first %} <a href="your_orders/{{col}}"> {{col}} </a> {% else %} {{col}} {% endif %} </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+    
+</body>
+</html>
+{% endblock %}
